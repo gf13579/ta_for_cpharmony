@@ -12,10 +12,11 @@ threat_hunt_uri = "/app/threathunting/prod-gcp-apollo/"
 threat_dash_uri = "/dashboard/endpoint/threathunting#/search"
 login_uri = "/auth/user"
 
-password = getpass()
+username = input("email address: ")
+password = getpass(prompt="password: ")
 
 payload = {
-  "email": "greg.ford@intalock.com.au",
+  "email": username,
   "password": password,
   "captchaKey": "null"
 }
