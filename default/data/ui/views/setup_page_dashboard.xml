@@ -17,8 +17,8 @@ https://docs.splunk.com/Documentation/Splunk/latest/Viz/PanelreferenceforSimplif
                     <h3>Setup Page</h3>
                     <div>
                         <div class='text'>
-                            <span>Enter Google CSE API Key (optional):</span>
-                            <input type='password' id='apikey_input'></input>
+                            <span>Enter password:</span>
+                            <input type='password' id='password_input'></input>
                         </div>
                         <!-- Complete Setup button will call the completeSetup() function
                              within javascript/setup_page.js -->

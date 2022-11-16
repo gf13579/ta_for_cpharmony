@@ -1,12 +1,12 @@
 "use strict";
 
-const appName = "ta_for_dorks";
+const appName = "ta_for_cpharmony";
 const appNamespace = {
     owner: "nobody",
     app: appName,
     sharing: "app",
 };
-const pwRealm = "ta_for_dorks_realm";
+const pwRealm = "ta_for_cpharmony_realm";
 const pwName = "password";
 
 // Splunk Web Framework Provided files
@@ -21,8 +21,8 @@ require([
     // onclick function for "Complete Setup" button from setup_page_dashboard.xml
     async function completeSetup() {
         console.log("setup_page.js completeSetup called");
-        // Value of apikey_input from setup_page_dashboard.xml
-        const passwordToSave = $('#apikey_input').val();
+        // Value of password_input from setup_page_dashboard.xml
+        const passwordToSave = $('#password_input').val();
         let stage = 'Initializing the Splunk SDK for Javascript';
         try {
             // Initialize a Splunk Javascript SDK Service instance

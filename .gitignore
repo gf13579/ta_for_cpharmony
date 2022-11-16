@@ -1,6 +1,7 @@
 /.venv
 /.vscode
 local/
+bin/TEMP
 launch.json
 passwords.conf
 local.meta
