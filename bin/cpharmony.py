@@ -36,10 +36,15 @@ class cpharmony_connector:
         response = self.session.post(url=url, verify=False, json=payload)
         logger.info(f"Status code from login: {response.status_code}")
         logger.debug(response.text)
-        assert(response.status_code == 200)
 
-        self.csrf_token = response.json()["csrf"]
-        self.session.headers.update({"X-Access-Token": self.csrf_token})
+        #assert(response.status_code == 200)
+        if (response.status_code != 200):
+            return False
+        else:
+            self.csrf_token = response.json()["csrf"]
+            self.session.headers.update({"X-Access-Token": self.csrf_token})
+        
+        return True
 
     def query_active_attacks(self):
         threat_hunt_uri = "/app/threathunting/prod-gcp-apollo/"
@@ -93,10 +98,11 @@ def main():
 
     cp_connector = cpharmony_connector(username=username, password=password, region="ap", verify=False)
 
-    cp_connector.login()
-    results = cp_connector.query_active_attacks()
-    
-    logger.debug(pformat(results))
+    if cp_connector.login():
+        results = cp_connector.query_active_attacks()
+        logger.debug(pformat(results))
+    else:
+        logger.error("Failed to login")
 
 
 if __name__ == "__main__":

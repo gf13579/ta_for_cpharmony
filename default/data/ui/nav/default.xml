@@ -1,0 +1,14 @@
+<nav search_view="search">
+  <view name="search" default='true' />
+  <view name="alerts" />
+  <collection label="Edit lookups">
+    <a href="/app/lookup_editor/lookup_edit?owner=nobody&amp;namespace=ta_for_dorks&amp;lookup=dork_entities.csv&amp;type=csv" target="_blank">Entities</a>
+    <a href="/app/lookup_editor/lookup_edit?owner=nobody&amp;namespace=ta_for_dorks&amp;lookup=dork_queries.csv&amp;type=csv" target="_blank">Queries</a>
+  </collection>
+  <collection label="Advanced">
+    <view name="analytics_workspace" />
+    <view name="datasets" />
+    <view name="reports" />
+    <view name="dashboards" />
+  </collection>
+</nav>
