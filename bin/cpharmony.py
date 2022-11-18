@@ -140,13 +140,25 @@ class MyScript(Script):
                 event = Event()
                 event.stanza = stanza
                 event.data = json.dumps(r)
-                # Use event time - Base.OpTimeUTC - if present
-                logger.debug("Checking whether Base is in r")
+                # log OpTimeUTC for diagnosing timestamp issues
                 if "Base" in r:
                     if "OpTimeUTC" in r["Base"]:
-                        logger.debug("Checking whether OpTimeUTC is in r Base")
-                        event.time = int(round(int(r["Base"]["OpTimeUTC"]) / 1000, 0))
-                        logger.debug(f"event.time is {event.time}")
+                        optime_utc = r["Base"]["OpTimeUTC"]
+                        logger.info(
+                            f"Writing event with ['Base']['OpTimeUTC'] set to {optime_utc}"
+                        )
+                    else:
+                        logger.info("Writing event with no OpTimeUTC value in ['Base']")
+                else:
+                    logger.info("Writing event with no ['Base']")
+
+                # Use event time - Base.OpTimeUTC - if present
+                # logger.debug("Checking whether Base is in r")
+                # if "Base" in r:
+                #     if "OpTimeUTC" in r["Base"]:
+                #         logger.debug("Checking whether OpTimeUTC is in r Base")
+                #         event.time = int(round(int(r["Base"]["OpTimeUTC"]) / 1000, 0))
+                #         logger.debug(f"event.time is {event.time}")
                 ew.write_event(event)
 
         logger.debug(f"Finished queries. Events created: {len(results)}")
