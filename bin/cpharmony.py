@@ -4,7 +4,6 @@ import json
 import os
 import sys
 from loguru import logger
-from pprint import pformat
 
 # sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "lib"))
 from splunklib.modularinput import Scheme, Argument, Event, Script
@@ -140,6 +139,7 @@ class MyScript(Script):
                 event = Event()
                 event.stanza = stanza
                 event.data = json.dumps(r)
+
                 # log OpTimeUTC for diagnosing timestamp issues
                 if "Base" in r:
                     if "OpTimeUTC" in r["Base"]:
@@ -152,13 +152,6 @@ class MyScript(Script):
                 else:
                     logger.info("Writing event with no ['Base']")
 
-                # Use event time - Base.OpTimeUTC - if present
-                # logger.debug("Checking whether Base is in r")
-                # if "Base" in r:
-                #     if "OpTimeUTC" in r["Base"]:
-                #         logger.debug("Checking whether OpTimeUTC is in r Base")
-                #         event.time = int(round(int(r["Base"]["OpTimeUTC"]) / 1000, 0))
-                #         logger.debug(f"event.time is {event.time}")
                 ew.write_event(event)
 
         logger.debug(f"Finished queries. Events created: {len(results)}")

@@ -1,9 +1,11 @@
 <nav search_view="search">
   <view name="search" default='true' />
   <view name="alerts" />
+  <view name="troubleshooting" />
+  <collection label="Configuration">
+    <a href="/app/ta_for_cpharmony/setup_page_dashboard?action=edit" target="_blank">Edit Credentials</a>
+  </collection>
   <collection label="Advanced">
-    <view name="analytics_workspace" />
-    <view name="datasets" />
     <view name="reports" />
     <view name="dashboards" />
   </collection>
