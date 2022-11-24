@@ -37,7 +37,9 @@ class MyScript(Script):
         # "CPHarmony" is the name Splunk will display to users for this input.
         scheme = Scheme("CPHarmony")
 
-        scheme.description = "Streams events containing dork search results."
+        scheme.description = (
+            "Streams events containing Checkpoint Harmony threat hunting query results."
+        )
         scheme.use_external_validation = False
 
         # Set to false so each input can have an optional interval parameter
