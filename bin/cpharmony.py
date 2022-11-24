@@ -51,6 +51,14 @@ class MyScript(Script):
         hoursago_argument.description = "Controls variables.queryParam.dateRange.from"
         scheme.add_argument(hoursago_argument)
 
+        region_argument = Argument("query_region")
+        region_argument.title = "Region (e.g. ap)"
+        region_argument.data_type = Argument.data_type_string
+        region_argument.description = (
+            "Controls the target site: https://<region>.portal.checkpoint.com/"
+        )
+        scheme.add_argument(region_argument)
+
         username_argument = Argument("username")
         username_argument.title = "Username"
         username_argument.data_type = Argument.data_type_string
@@ -86,6 +94,12 @@ class MyScript(Script):
         if not hours_ago.isnumeric():
             raise ValueError("hours_ago must be an integer")
 
+        region = str(validation_definition.parameters["region"])
+        if not region or (region == ""):
+            region = "ap"
+
+        logger.debug(f"Chance to validate region: {region}")
+
     def stream_events(self, inputs, ew):
         """This function handles all the action: splunk calls this modular input
         without arguments, streams XML describing the inputs to stdin, and waits
@@ -105,6 +119,7 @@ class MyScript(Script):
 
         # Get mod input params
         hours_ago = str(inputs.inputs[stanza]["query_hours_ago"])
+        region = str(inputs.inputs[stanza]["region"])
         username = str(inputs.inputs[stanza].get("username"))
 
         password = None
@@ -118,7 +133,7 @@ class MyScript(Script):
 
         logger.debug("instantiating connector")
         cp_connector = cpharmony_connector(
-            username=username, password=password, region="ap", verify=False
+            username=username, password=password, region=region, verify=False
         )
 
         if not cp_connector.login():

@@ -3,4 +3,5 @@
 
 interval = <value>
 query_hours_ago = <value>
+region = <value>
 username = <value>
