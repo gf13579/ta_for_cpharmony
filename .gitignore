@@ -5,3 +5,5 @@ bin/TEMP
 launch.json
 passwords.conf
 local.meta
+__pycache__
+*.pyc
