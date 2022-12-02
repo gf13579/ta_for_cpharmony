@@ -51,7 +51,7 @@ class MyScript(Script):
         hoursago_argument.description = "Controls variables.queryParam.dateRange.from"
         scheme.add_argument(hoursago_argument)
 
-        region_argument = Argument("query_region")
+        region_argument = Argument("region")
         region_argument.title = "Region (e.g. ap)"
         region_argument.data_type = Argument.data_type_string
         region_argument.description = (
@@ -133,7 +133,7 @@ class MyScript(Script):
 
         logger.debug("instantiating connector")
         cp_connector = cpharmony_connector(
-            username=username, password=password, region=region, verify=False
+            username=username, password=password, region=region, verify=True
         )
 
         if not cp_connector.login():

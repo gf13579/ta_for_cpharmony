@@ -72,7 +72,6 @@ class cpharmony_connector:
         )
 
         # Get stats
-        # logger.info("preparing stats payload")
         stats_payload = cpharmony_consts.TH_STATS_PAYLOAD
         stats_payload["variables"]["queryParam"]["dateRange"]["from"] = earliest_time
         stats_payload["variables"]["queryParam"]["dateRange"]["to"] = current_time
