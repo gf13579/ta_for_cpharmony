@@ -7,3 +7,4 @@ passwords.conf
 local.meta
 __pycache__
 *.pyc
+__pycache__/
