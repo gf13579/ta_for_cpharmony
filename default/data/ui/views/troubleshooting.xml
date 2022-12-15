@@ -19,7 +19,7 @@
           <latest>$timePicker1.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
+        <option name="count">5</option>
         <option name="list.drilldown">none</option>
         <option name="list.wrap">1</option>
         <option name="maxLines">5</option>
@@ -38,12 +38,12 @@
       <title>Errors and warnings in splunkd.log</title>
       <event>
         <search>
-          <query>index=_internal cpharmony sourcetype=splunkd WARN OR ERROR</query>
+          <query>index=_internal cpharmony ta_for_cpharmony sourcetype=splunkd WARN OR ERROR</query>
           <earliest>$timePicker1.earliest$</earliest>
           <latest>$timePicker1.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="count">20</option>
+        <option name="count">5</option>
         <option name="list.drilldown">none</option>
         <option name="list.wrap">1</option>
         <option name="maxLines">5</option>
