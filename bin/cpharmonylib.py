@@ -12,14 +12,19 @@ import cpharmony_consts
 class cpharmony_connector:
     session = requests.Session()
 
-    def __init__(self, username, password, region="ap", verify=True):
+    def __init__(self, username, password, region="", verify=True):
         self.username = username
         self.password = password
         self.csrf_token = None
 
+        if region == "":
+            region_str = ""
+        else:
+            region_str = f"{region}."
+
         self.session.verify = verify
-        self.cloudinfra_gw_url = f"https://cloudinfra-gw.{region}.portal.checkpoint.com"
-        self.portal_url = f"https://{region}.portal.checkpoint.com"
+        self.cloudinfra_gw_url = f"https://cloudinfra-gw.{region_str}portal.checkpoint.com"
+        self.portal_url = f"https://{region_str}portal.checkpoint.com"
 
     def login(self):
         login_uri = "/auth/user"
