@@ -33,4 +33,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete latest && true
-          gh release create latest splunk_app_for_easm.tgz --latest --title "Latest Release" --generate-notes
+          gh release create latest ta_for_cpharmony.tgz --latest --title "Latest Release" --generate-notes
