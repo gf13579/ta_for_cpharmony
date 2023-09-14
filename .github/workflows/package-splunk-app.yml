@@ -4,7 +4,7 @@ name: "Package Splunk App"
 "on":
   push:
     branches:
-      - main  # Set a branch to deploy
+      - master  # Set a branch to deploy
 
 permissions:
   contents: write
