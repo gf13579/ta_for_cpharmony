@@ -95,8 +95,8 @@ class MyScript(Script):
             raise ValueError("hours_ago must be an integer")
 
         region = str(validation_definition.parameters["region"])
-        if not region or (region == ""):
-            region = "ap"
+        if not region:
+            region = ""
 
         logger.debug(f"Chance to validate region: {region}")
 
@@ -119,7 +119,7 @@ class MyScript(Script):
 
         # Get mod input params
         hours_ago = str(inputs.inputs[stanza]["query_hours_ago"])
-        region = str(inputs.inputs[stanza]["region"])
+        region = inputs.inputs[stanza].get("region", "")
         username = str(inputs.inputs[stanza].get("username"))
 
         password = None
