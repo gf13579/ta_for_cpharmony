@@ -23,7 +23,9 @@ class cpharmony_connector:
             region_str = f"{region}."
 
         self.session.verify = verify
-        self.cloudinfra_gw_url = f"https://cloudinfra-gw.{region_str}portal.checkpoint.com"
+        self.cloudinfra_gw_url = (
+            f"https://cloudinfra-gw.{region_str}portal.checkpoint.com"
+        )
         self.portal_url = f"https://{region_str}portal.checkpoint.com"
 
     def login(self):
@@ -37,7 +39,7 @@ class cpharmony_connector:
 
         # Login
         url = self.cloudinfra_gw_url + login_uri
-        response = self.session.post(url=url, verify=False, json=payload)
+        response = self.session.post(url=url, verify=True, json=payload)
         logger.info(f"Status code from login: {response.status_code}")
 
         if response.status_code != 200:
@@ -56,7 +58,7 @@ class cpharmony_connector:
 
         # Access the Threat Hunting page
         url = self.portal_url + threat_dash_uri
-        response = self.session.get(url=url, verify=False)
+        response = self.session.get(url=url, verify=True)
         logger.info(
             f"Status code from accessing the threat hunting page: {response.status_code}"
         )
@@ -82,7 +84,7 @@ class cpharmony_connector:
         stats_payload["variables"]["queryParam"]["dateRange"]["to"] = current_time
 
         self.session.headers.update({"Content-Type": "application/json"})
-        response = self.session.post(url=url, verify=False, json=stats_payload)
+        response = self.session.post(url=url, verify=True, json=stats_payload)
         logger.info(f"Status code from stats query: {response.status_code}")
 
         # Prepare query
@@ -93,7 +95,7 @@ class cpharmony_connector:
         # Get detections
         payload_str = json.dumps(payload, separators=(",", ":"))
         payload_str = payload_str.replace('"null"', "null")
-        response = self.session.post(url=url, verify=False, data=payload_str)
+        response = self.session.post(url=url, verify=True, data=payload_str)
 
         logger.info(f"Status code from active attack query: {response.status_code}")
         if response.status_code != 200:
@@ -120,7 +122,7 @@ def main():
     password = args.password
 
     cp_connector = cpharmony_connector(
-        username=username, password=password, region="ap", verify=False
+        username=username, password=password, region="ap", verify=True
     )
 
     if cp_connector.login():
